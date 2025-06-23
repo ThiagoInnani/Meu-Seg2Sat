@@ -1,0 +1,3 @@
+lsof -i :8008
+
+kill <pid>
