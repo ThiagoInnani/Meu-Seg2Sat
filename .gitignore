@@ -1,3 +1,7 @@
 **/node_modules
 **/diffusers/
 **/modelout/
+/pinus_dataset/
+**/model_pinus_finetuned/
+finetuning/controlnet_training/model_pinus_finetuned/
+finetuning/controlnet_training/.ipynb_checkpoints/

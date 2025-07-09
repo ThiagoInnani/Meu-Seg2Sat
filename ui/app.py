@@ -16,7 +16,7 @@ def index():
 
 def save_base64_image(base64Image):
     image_data = base64.b64decode(base64Image)
-    path = "input_image.jpg"
+    path = "input_image.png"  # CORRIGIDO para usar o formato sem perdas PNG
     with open(path, 'wb') as f:
         f.write(image_data)
     return path

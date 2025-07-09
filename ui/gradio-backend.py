@@ -8,7 +8,12 @@ import torch
 
 import gradio as gr
 
-controlnet = ControlNetModel.from_pretrained("rgres/sd-controlnet-aerialdreams", torch_dtype=torch.float16)
+#controlnet = ControlNetModel.from_pretrained("rgres/sd-controlnet-aerialdreams", torch_dtype=torch.float16)
+
+caminho_do_modelo = "../finetuning/controlnet_training/model_pinus_finetuned"
+controlnet = ControlNetModel.from_pretrained(caminho_do_modelo, torch_dtype=torch.float16)
+
+
 pipe = StableDiffusionControlNetPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-1-base", controlnet=controlnet, torch_dtype=torch.float16
 )

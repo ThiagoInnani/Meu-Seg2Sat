@@ -1,3 +1,12 @@
 lsof -i :8008
 
 kill <pid>
+
+
+Aerial view of a forest with pinus trees in Paraná, Brazil. photorealistic, 4k, high detail.
+
+
+http://localhost:7860
+
+
+../finetuning/controlnet_training/model_pinus_finetuned

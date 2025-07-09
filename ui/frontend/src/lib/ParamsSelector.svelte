@@ -76,8 +76,8 @@
 			bind:value={sampleSteps}
 			type="range"
 			name="steps"
-			min="10"
-			max="30"
+			min="1"
+			max="100"
 			step="1"
 			disabled={$generateMap === true}
 		/>

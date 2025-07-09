@@ -18,7 +18,8 @@ const COLOR_LIST = [
   { color: [61, 230, 235], label: "swimming pool" },
   { color: [255, 255, 255], label: "snow" },
   { color: [138, 179, 160], label: "clear cut" },
-  { color: [107, 113, 79], label: "mixed" }
+  { color: [107, 113, 79], label: "mixed" },
+  { color: [95, 80, 231], label: "pinus" }
 ];
 const API = "https://zqz606ggn85ysase.us-east-1.aws.endpoints.huggingface.cloud";
 const IMAGES_LIST = [
@@ -88,10 +89,10 @@ const currentCanvas = writable();
 const selectedImage = writable();
 const selectedBrush = writable();
 const selectedParams = writable({
-  prompt: "Aerial view of rue des Lilas, Toulouse, Haute-Garonne, France",
+  prompt: "Aerial view of a forest with pinus trees in Paran\xE1, Brazil.",
   modifier: PRESETS[0][0],
   seed: randomSeed(),
-  steps: 20
+  steps: 30
 });
 const generateMap = writable(false);
 const saveResult = writable(false);
@@ -179,7 +180,7 @@ const ParamsSelector = create_ssr_component(($$result, $$props, $$bindings, slot
 	<button ${$generateMap === true ? "disabled" : ""} class="${"svelte-7to72y"}">Random
 	</button>
 	<h4 class="${"font-bold mt-6 mb-2 my-6 leading-6"}">Sample Steps</h4>
-	<div class="${"flex"}"><input type="${"range"}" name="${"steps"}" min="${"10"}" max="${"30"}" step="${"1"}" ${$generateMap === true ? "disabled" : ""} class="${"svelte-7to72y"}"${add_attribute("value", sampleSteps, 0)}>
+	<div class="${"flex"}"><input type="${"range"}" name="${"steps"}" min="${"1"}" max="${"100"}" step="${"1"}" ${$generateMap === true ? "disabled" : ""} class="${"svelte-7to72y"}"${add_attribute("value", sampleSteps, 0)}>
 		<label class="${"pl-2 svelte-7to72y"}" for="${"steps"}">${escape(sampleSteps)}</label></div>
 </form>`;
 });
@@ -314,7 +315,7 @@ const ResultCanvas = create_ssr_component(($$result, $$props, $$bindings, slots)
   $$unsubscribe_generateMap();
   $$unsubscribe_selectedParams();
   $$unsubscribe_currentCanvas();
-  return `<div class="${"relative overflow-clip flex flex-col justify-center items-center w-full h-full"}">${$resultImage ? `<img class="${"image " + escape($generateMap ? "opacity-30" : "") + " svelte-1t0h0rs"}" alt="${"Generative Map Result"}"${add_attribute("src", $resultImage, 0)} width="${"512"}" height="${"512"}">` : ``}
+  return `<div class="${"relative overflow-clip flex flex-col justify-center items-center w-full h-full"}">${$resultImage ? `<img class="${"image " + escape($generateMap ? "opacity-30" : "") + " svelte-1t0h0rs"}" alt="${"Endpoint is starting, try again in a few minutes"}"${add_attribute("src", $resultImage, 0)} width="${"512"}" height="${"512"}">` : ``}
 	${$generateMap ? `<div class="${"loading svelte-1t0h0rs"}"><svg xmlns="${"http://www.w3.org/2000/svg"}" fill="${"none"}" viewBox="${"0 0 24 24"}" class="${"animate-spin max-w-[3rem]"}"><path fill="${"currentColor"}" d="${"M20 12a8 8 0 0 1-8 8v4a12 12 0 0 0 12-12h-4Zm-2-5.3a8 8 0 0 1 2 5.3h4c0-3-1.1-5.8-3-8l-3 2.7Z"}"></path></svg>
 			<span class="${"text-xs"}">${escape(predictStatus)}</span></div>` : ``}</div>
 
@@ -339,7 +340,7 @@ const Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<div class="${"max-w-screen-md mx-auto px-3 py-5 relative z-0"}"><article class="${"prose"}"><h1>Drawing to Map</h1>
 		<p>This space is for the ControlNet model <a href="${"https://github.com/RubenGres/Seg2Sat"}" target="${"_blank"}"><span>Seg2Sat</span></a></p>
 
-		<p>If you don&#39;t get your result in a few seconds after query, wait 2minutes and come back. GPU time is expensive</p></article>
+		<p>If you don&#39;t get your result in a few seconds after query, wait 2minutes and come back. GPU time is expensive and the model is not always running</p></article>
 
 
 	${validate_component(BrushSelector, "BrushSelector").$$render($$result, {}, {}, {})}
